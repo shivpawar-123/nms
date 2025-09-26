@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from functools import reduce
+
+data = pd.DataFrame([
+    [9, 4, 8, 9],
+    [8, 10, 7, 6],
+    [7, 6, 8, 5]
+], columns=['maths', 'english', 'science', 'history'])
+
+print(data.agg(['sum', 'min', 'max']))
+
+m = lambda x: x + 10
+print(m(5))
+print(data)
+
+maths_squared = list(map(lambda x: x * x, data['maths']))
+print(f"Maths squared: {maths_squared}")
+
+odd_maths = list(filter(lambda x: x % 2 != 0, data['maths']))
+print(f"Odd numbers in maths: {odd_maths}")
+
+b = reduce(lambda x, y: x + y, data['science'])
+print(f"Sum of science scores: {b}")
+
+plt.figure(figsize=(8, 6))
+plt.plot(data['maths'], label='Maths', marker='o', linestyle='-', color='b')   Line plot for maths
+plt.plot(data['english'], label='English', marker='x', linestyle='--', color='g')  # Line plot for english
+
+plt.title("Maths vs English Scores")
+plt.xlabel("Students")
+plt.ylabel("Scores")
+plt.legend()
+plt.grid(True)
+plt.show()
